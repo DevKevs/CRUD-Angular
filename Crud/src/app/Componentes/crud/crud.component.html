@@ -1,0 +1,85 @@
+<div class="container pt-5">
+  <div class="row">
+    <div class="col">
+      <div class="alert alert-danger" role="alert" *ngIf = "DeleteVal">
+        Categoria eliminada con exito
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-plus-square"></i> Agregar categoria
+        </div>
+        <div class="card-body">
+          <form [formGroup] = "Data" (ngSubmit) = "save()">
+            <div class="form-group" hidden>
+              <label for="idcategoria">Id categoria</label>
+              <input type="text" name="idcategoria" id="idcategoria" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nombre">Nombre de la categoria</label>
+              <input type="text" formControlName= "Nombre_categoria" id="nombre" class="form-control">
+            </div>
+            <div class="alert alert-primary" role="alert" *ngIf = "Validation">
+              Categoria agregada con exito
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col" style="overflow: auto; height: 300px;;">
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Categoria</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let i of Info">
+            <th scope="row">{{i.IdCategoria}}</th>
+            <td>{{i.Nombre_Categoria}}</td>
+            <td>
+              <button class="btn btn-success mr-2" data-toggle="modal" data-target="#exampleModal" (click)="LoadForm(i)"><i class="fas fa-edit"></i></button>
+              <button class="btn btn-danger" (click) = "delete(i.IdCategoria)"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Actualizar la categoria</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup] = "UpdateData" (ngSubmit) = "update()">
+          <div class="form-group" hidden>
+            <label for="idcategoria">Id categoria</label>
+            <input type="text" formControlName= "Id" id="idcategoria" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="nombre">Nombre de la categoria</label>
+            <input type="text" formControlName= "Nombre_categoria" id="nombre" class="form-control">
+          </div>
+          <div class="alert alert-warning" role="alert" *ngIf = "UpdateVal">
+            Categoria Actualizada con exito
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
