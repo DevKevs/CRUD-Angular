@@ -1,5 +1,5 @@
 # CRUD-Angular
-A simple Crud using angular Js framework 
+A simple Crud using angular Js framework and API rest service 
 
 <h1>Install</h1>
 
